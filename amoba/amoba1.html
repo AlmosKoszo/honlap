@@ -1,0 +1,219 @@
+<html>
+ <head>
+    <meta charset="utf-8">
+    <meta charset="utf-8">
+    <script src="https://cdn.jsdelivr.net/npm/brython@3/brython.min.js"></script>
+    <script type="text/python">
+            from browser import document, html
+            n, bc, next, stop = 10, "background-color", "X", 0
+            t = [ [ 0 ] * ( n + 2 ) for i in range( n + 2 ) ]
+            def nyert( next ):
+              global stop
+              if next == "X":
+                document[ 'no' ].style = { "display": "block" }
+              else:
+                document[ 'nx' ].style = { "display": "block" }
+              stop = 1
+            def katt( e ):
+              global stop, next; xy = e.target.id.split( '-' )
+              x, y = int( xy[ 0 ] ), int( xy[ 1 ] )
+              if stop == 0 and t[ x + 1 ][ y + 1 ] == 0:
+                global next; e.target.html = next
+                if next == "X":
+                  next = "O"; t[ x + 1 ][ y + 1 ] = "O"
+                  e.target.style = { bc: "#437264" }
+                else:
+                  next = "X"; t[ x + 1 ][ y + 1 ] = "X"
+                  e.target.style = { bc: "#af5489" }
+                for v in [ ( 1, 1 ), ( 1, 0 ), ( 0, 1 ) ]:
+                  maxh = 0
+                  for i in [-1, 1]:
+                    xp, yp = x, y
+                    while t[ xp + 1 ][ yp + 1 ] == next:
+                      xp += i * v[ 0 ]; yp += i * v[ 1 ]; maxh += 1
+                  if maxh > 5:
+                    nyert( next )
+            h =  html.HEADER(); h <= html.TITLE( "Amőba II." )
+            v =  html.BODY(); v <= html.H2( "Amőba" )
+            v <= html.DIV( "Nyert: X", id = "nx" )
+            v <= html.DIV( "Nyert: O", id = "no" )
+            v <= html.TABLE( map ( lambda j:
+                 html.TR( map( lambda i:
+                    html.TD( id = f'{i}-{j}' )
+                        .bind( "click", katt ), range( n ) )
+                 ), range( n ) )
+            )
+            document <= h + v
+    </script>
+    <style>
+            body {
+              font-family: 'Segoe UI', Verdana; text-shadow: 1px 1px 3px black;
+            }
+            table {
+                user-select: none; text-align: center;
+                margin: auto; border-spacing: 4px;
+            }
+            td {
+                cursor: pointer ; text-align: center;
+                width: 23px; height: 23px; color:snow;
+                background-color: #e6f3ef; padding:3px;
+                border-radius: 4px; box-shadow: 1px 1px 3px rgb(99, 97, 97);
+                cursor: pointer; border: solid 1px rgb(29, 43, 75);
+            }
+            td.c {
+                color:rgb(220, 215, 160);
+                background-color: rgb(73, 108, 64);
+            }
+            h2 {
+                text-align: center;
+            }
+            div#no, div#nx {
+                user-select: none; display: none;
+                position: fixed; text-align: center;
+                width: 250px; height: 70px; top: 50%; left: 50%;
+                margin-top: -300px; margin-left: -150px;
+                border: double 5px black; padding: 20px; border-radius: 7px;
+                box-shadow: 1px 1px 4px black inset;
+                background-color: rgba(200,240,250,0.8); font-size: 50px;
+            }
+            div#no {
+                color: #af5489;
+            }
+            div#nx {
+                color: #437264;
+            }
+    </style>
+ </head>
+ <body onload="brython()">
+    <header>
+        <title>Amőba II.</title>
+    </header>
+    <body>
+        <h2>Amőba</h2>
+        <div id="nx">Nyert: X</div>
+        <div id="no">Nyert: O</div>
+        <table>
+            <tr>
+                <td id="0-0"></td>
+                <td id="1-0"></td>
+                <td id="2-0"></td>
+                <td id="3-0"></td>
+                <td id="4-0"></td>
+                <td id="5-0"></td>
+                <td id="6-0"></td>
+                <td id="7-0"></td>
+                <td id="8-0"></td>
+                <td id="9-0"></td>
+            </tr>
+            <tr>
+                <td id="0-1"></td>
+                <td id="1-1"></td>
+                <td id="2-1"></td>
+                <td id="3-1"></td>
+                <td id="4-1"></td>
+                <td id="5-1"></td>
+                <td id="6-1"></td>
+                <td id="7-1"></td>
+                <td id="8-1"></td>
+                <td id="9-1"></td>
+            </tr>
+            <tr>
+                <td id="0-2"></td>
+                <td id="1-2"></td>
+                <td id="2-2"></td>
+                <td id="3-2"></td>
+                <td id="4-2"></td>
+                <td id="5-2"></td>
+                <td id="6-2"></td>
+                <td id="7-2"></td>
+                <td id="8-2"></td>
+                <td id="9-2"></td>
+            </tr>
+            <tr>
+                <td id="0-3"></td>
+                <td id="1-3"></td>
+                <td id="2-3"></td>
+                <td id="3-3"></td>
+                <td id="4-3"></td>
+                <td id="5-3"></td>
+                <td id="6-3"></td>
+                <td id="7-3"></td>
+                <td id="8-3"></td>
+                <td id="9-3"></td>
+            </tr>
+            <tr>
+                <td id="0-4"></td>
+                <td id="1-4"></td>
+                <td id="2-4"></td>
+                <td id="3-4"></td>
+                <td id="4-4"></td>
+                <td id="5-4"></td>
+                <td id="6-4"></td>
+                <td id="7-4"></td>
+                <td id="8-4"></td>
+                <td id="9-4"></td>
+            </tr>
+            <tr>
+                <td id="0-5"></td>
+                <td id="1-5"></td>
+                <td id="2-5"></td>
+                <td id="3-5"></td>
+                <td id="4-5"></td>
+                <td id="5-5"></td>
+                <td id="6-5"></td>
+                <td id="7-5"></td>
+                <td id="8-5"></td>
+                <td id="9-5"></td>
+            </tr>
+            <tr>
+                <td id="0-6"></td>
+                <td id="1-6"></td>
+                <td id="2-6"></td>
+                <td id="3-6"></td>
+                <td id="4-6"></td>
+                <td id="5-6"></td>
+                <td id="6-6"></td>
+                <td id="7-6"></td>
+                <td id="8-6"></td>
+                <td id="9-6"></td>
+            </tr>
+            <tr>
+                <td id="0-7"></td>
+                <td id="1-7"></td>
+                <td id="2-7"></td>
+                <td id="3-7"></td>
+                <td id="4-7"></td>
+                <td id="5-7"></td>
+                <td id="6-7"></td>
+                <td id="7-7"></td>
+                <td id="8-7"></td>
+                <td id="9-7"></td>
+            </tr>
+            <tr>
+                <td id="0-8"></td>
+                <td id="1-8"></td>
+                <td id="2-8"></td>
+                <td id="3-8"></td>
+                <td id="4-8"></td>
+                <td id="5-8"></td>
+                <td id="6-8"></td>
+                <td id="7-8"></td>
+                <td id="8-8"></td>
+                <td id="9-8"></td>
+            </tr>
+            <tr>
+                <td id="0-9"></td>
+                <td id="1-9"></td>
+                <td id="2-9"></td>
+                <td id="3-9"></td>
+                <td id="4-9"></td>
+                <td id="5-9"></td>
+                <td id="6-9"></td>
+                <td id="7-9"></td>
+                <td id="8-9"></td>
+                <td id="9-9"></td>
+            </tr>
+        </table>
+    </body>
+ </body>
+</html>
