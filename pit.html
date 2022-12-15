@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pitagórász</title>
+    <style>
+        
+        *{
+            position:relative;
+        }
+ 
+        #triangle{
+            width:230px;
+            display:flex;
+            align-self:center;
+            margin:auto;
+        }
+        body{
+            background-color:rgb(34, 153, 139);
+        }
+        input::placeholder{
+            text-align:center;
+            font-weight:bold;
+            color:black;
+            
+        }
+        input{
+            width:40px;
+        }
+        #bInput{
+            left:700px;
+            top:10px;
+        }
+        #aInput{
+            left:600px;
+            bottom:100px;
+        }
+        #button{
+            width:90px;
+        }
+        #result{
+            width:40px;
+            background-color:white;
+            text-align:center;
+            position:relative;
+            font-weight:bold;
+            font-family:sans-serif;
+            left:780px;
+            bottom:130px;
+        }
+        #heading{
+            color:white;
+            text-align:center;
+        }
+        .triangle-up {
+	        width: 0;
+	        height: 0;
+	        border-left: 30px solid transparent;
+	        border-right: 25px solid transparent;
+	        border-bottom: 50px solid #555;
+        }
+    </style>
+</head>
+<body>
+    <h1 id="heading"> Pitágórász tétel <br> Kiszámító</h1>
+    
+    <div id="container">
+       
+        <img id="triangle" alt="triangle" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Triangle.Right.svg/1200px-Triangle.Right.svg.png">
+      
+      
+        <input placeholder="A" id="aInput">
+ 
+       <input placeholder="B" id="bInput">
+       <div id="result"></div>
+ 
+       <button id="button">Calculate</button>
+    </div>
+ 
+    <script>
+        var button = document.getElementById('button');
+ 
+        function calculateHypotenuse(){
+            var a = document.getElementById('aInput').value;
+            var b = document.getElementById('bInput').value;
+ 
+            var result = document.getElementById('result');
+ 
+            var hypotenuse = Math.round(Math.sqrt((a*a)+ (b*b)));
+            
+            result.innerHTML=hypotenuse;
+        }
+ 
+        button.addEventListener('click',  calculateHypotenuse)
+        
+    </script>
+    <input type="range" min="0" max="400" onmousemove="f()" id="i1"><br>
+    <input type="range" min="0" max="400" onmousemove="f()" id="i2"><br>
+    <svg height="500" width="500">
+        <polygon points="200,10 250,190 160,210" 
+                     style="fill:red;stroke:purple;stroke-width:1"
+                     id="x" />
+    </svg>
+    <script>
+        function f() {
+            a = Number(document.getElementById("i1").value)
+            b = Number(document.getElementById("i2").value)
+            document.getElementById("x").setAttribute("points", `${a},${b} 250,190 160,210`)
+        }
+    </script>
+    <div class="triangle-up"></div>
+</body>
+</html>
